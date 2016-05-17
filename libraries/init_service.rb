@@ -63,7 +63,7 @@ module InitService
           code <<-EOH
           chkconfig --add #{new_resource.name}
           EOH
-          not_if "chkconfig|grep #{new_resource.name}"
+          not_if "chkconfig|grep -E '^#{new_resource.name}$'"
         end
       end
     end
