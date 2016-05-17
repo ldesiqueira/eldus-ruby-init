@@ -1,0 +1,15 @@
+#!<%=@context[:interpreter]%>
+require 'daemons'
+### BEGIN INIT INFO
+# Provides:          <%=@context[:name]%>
+# Required-Start:    <%=@context[:required_start]%>
+# Required-Stop:     <%=@context[:required_stop]%>
+# Default-Start:     <%=@context[:default_start]%>
+# Default-Stop:      <%=@context[:default_stop]%>
+# Short-Description: <%=@context[:short_description]%>
+# Description:       <%=@context[:long_description]%>
+### END INIT INFO
+opts = {:dir_mode => :system}
+Daemons.run_proc('<%=@context[:name]%>', opts) do
+  exec '<%=@context[:command]%> <%=@context[:command_args]%>'
+end

@@ -1,0 +1,11 @@
+name 'poise-ruby-init'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures poise-ruby-init'
+long_description 'Installs/Configures poise-ruby-init'
+version '0.1.0'
+
+depends 'poise'
+depends 'poise-ruby-build'
+depends 'poise-runit'
