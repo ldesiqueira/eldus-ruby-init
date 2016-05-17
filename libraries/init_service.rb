@@ -64,7 +64,7 @@ module InitService
         #    EOH
         #    not_if "chkconfig|grep #{new_resource.name}"
         #  end
-        end
+        #end
       end
     end
   end
