@@ -24,6 +24,10 @@ Basic Usage
 init_service #{service.name} do
   command #{command.string}
 end
+init_service #{service.name} do
+  command #{command.string}
+  command_args #{command.args}
+end
 ```
 ```
 service #{service.name} do
