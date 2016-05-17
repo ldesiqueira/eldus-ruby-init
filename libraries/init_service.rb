@@ -23,8 +23,6 @@ module InitService
     attribute :required_stop, default: 'networking'
     attribute :default_start, default: '2 3 4 5'
     attribute :default_stop, default: '0 1 6'
-    attribute :short_description, default: 'this is a test daemon'
-    attribute :long_description, default: 'this is a test daemon'
   end
   class Provider < Chef::Provider
     include Poise
@@ -53,8 +51,8 @@ module InitService
           :required_stop => new_resource.required_stop,
           :default_start => new_resource.default_start,
           :default_stop => new_resource.default_stop,
-          :short_description => new_resource.short_description,
-          :long_description => new_resource.long_description,
+          :short_description => "#{new_resource.name} Service",
+          :long_description => "Managed by Chef",
           :command => new_resource.command,
           :command_args => new_resource.command_args
         }
