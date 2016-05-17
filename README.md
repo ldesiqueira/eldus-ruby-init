@@ -40,7 +40,3 @@ service #{service.name} do
   action :restart
 end
 ```
-
-Default Recipe
-==============
-- The default recipe will install runit and create an init daemon to start runsvdir on /service
