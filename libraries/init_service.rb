@@ -57,14 +57,14 @@ module InitService
           :command => new_resource.command,
           :command_args => new_resource.command_args
         }
-        #if new_resource.chkconfig
-        #  bash "adding #{new_resource.name} to chkconfig" do
-        #    code <<-EOH
-        #    chkconfig --add #{new_resource.name}
-        #    EOH
-        #    not_if "chkconfig|grep #{new_resource.name}"
-        #  end
-        #end
+      end
+      if new_resource.chkconfig
+        bash "adding #{new_resource.name} to chkconfig" do
+          code <<-EOH
+          chkconfig --add #{new_resource.name}
+          EOH
+          not_if "chkconfig|grep #{new_resource.name}"
+        end
       end
     end
   end

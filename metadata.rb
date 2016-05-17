@@ -4,7 +4,7 @@ maintainer_email 'LouTheBrew@gmail.com'
 license 'MIT'
 description 'Installs/Configures poise-ruby-init'
 long_description 'Installs/Configures poise-ruby-init'
-version '0.1.4'
+version '0.1.5'
 
 depends 'poise'
 depends 'poise-ruby-build'
