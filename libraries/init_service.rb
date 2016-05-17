@@ -61,9 +61,9 @@ module InitService
         if new_resource.chkconfig
           bash "adding #{new_resource.name} to chkconfig" do
             code <<-EOH
-            chkconfig --add runit
+            chkconfig --add #{new_resource.name}
             EOH
-            not_if 'chkconfig|grep runit'
+            not_if "chkconfig|grep #{new_resource.name}"
           end
         end
       end
