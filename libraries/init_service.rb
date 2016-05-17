@@ -42,6 +42,7 @@ module InitService
       template "#{new_resource.path}#{new_resource.name}" do
         source new_resource.template_stub
         mode new_resource.mode
+        cookbook new_resource.local_cookbook
         user new_resource.user
         group new_resource.group
         variables :context => {
