@@ -8,4 +8,3 @@ version '0.1.1'
 
 depends 'poise'
 depends 'poise-ruby-build'
-depends 'poise-runit'
