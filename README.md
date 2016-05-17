@@ -17,3 +17,22 @@ end
 - start, stop, restart, status is provided automatically
 
 - currently, further custimization of defaults is only available through replacing new_resource.template_stub.
+
+Basic Usage
+============
+```
+init_service #{service.name} do
+  command #{command.string}
+end
+```
+```
+service #{service.name} do
+  action :start
+end
+service #{service.name} do
+  action :stop
+end
+service #{service.name} do
+  action :restart
+end
+```

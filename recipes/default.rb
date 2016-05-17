@@ -13,6 +13,4 @@ runsvdir -P /services 'log: ....................................................
 end
 init_service 'runit' do
   command '/bin/runsvdir-start'
-  mode 0777
-  chkconfig true
 end
