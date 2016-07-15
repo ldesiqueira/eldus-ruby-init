@@ -2,7 +2,7 @@
 require 'aws-sdk'
 namespace :repository do
   cookbook_path = ENV['RAKE_COOKBOOK_PATH']
-  cookbook_name = ::File.read('NAME').strip
+  cookbook_name = ::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))
   task :full_sync do
     %w{repository:pull repository:up_minor_version repository:sync_berkshelf repository:git_commit_and_push}.each do |task|
       Rake::Task[task].invoke
@@ -18,16 +18,16 @@ namespace :repository do
     commit = <<-EOH
     git add -f *
     git add ./*
-    git commit -a -m "commit for version #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__), 'VERSION'))).strip}
-    git tag -a #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'VERSION')).strip} -m "version release #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)),'VERSION')).strip}"
+    git commit -a -m "commit for version #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))}
+    git tag -a #{} -m "version release #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))}"
     git push origin #{`git rev-parse --abbrev-ref HEAD`}
-    git push origin #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'VERSION')).strip}
-    git commit -a -m "commit for version #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'VERSION')).strip}"
+    git push origin #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))}
+    git commit -a -m "commit for version #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))}"
     EOH
     system "#{commit}"
   end
   task :up_minor_version do
-    stripped = ::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'VERSION')).strip
+    stripped = ::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION')).strip
     new_minor = stripped.split('.')[-1].to_i
     new_minor += 1
     new_minor_string = new_minor.to_s
@@ -91,8 +91,8 @@ driver:
   interface: <%= ENV['KITCHEN_NETWORK_INTERFACE'] %>
   tags:
     Name: <%= ENV['KITCHEN_INSTANCE_NAME_TAG'] %>
-    Cookbook: #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'NAME')).strip}
-    Cookbook_Version: #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'VERSION')).strip}
+    Cookbook: #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))}
+    Cookbook_Version: #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))}
     Developer: #{ENV['USER']}
 
 provisioner:
@@ -110,7 +110,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[#{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'NAME')).strip}::default]
+      - recipe[#{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))}::default]
     attributes:
   YAML
   system 'rm -rf .kitchen.yml'
@@ -130,7 +130,7 @@ platforms:
     suites:
       - name: default
         run_list:
-          - recipe[#{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)),'NAME'))}::default]
+          - recipe[#{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))}::default]
         attributes:
     EOH
     system 'rm -rf .kitchen.yml'
@@ -141,8 +141,8 @@ platforms:
 end
 namespace :notifications do
   task :status do
-    puts "Cookbook Name: #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'NAME'))}"
-    puts "Cookbook Version: #{::File.read(::File.join(::File.expand_path(::File.dirname(__FILE__)), 'VERSION'))}"
+    puts "Cookbook Name: #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))}"
+    puts "Cookbook Version: #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))}"
     puts "Resources Defined:"
     `ls libraries`.split.each do |resource|
       puts "  #{resource}"
@@ -258,7 +258,7 @@ namespace :special do
       end
     end
     if destroyed > 0
-      puts "Ran a check for extra instances related to cookbook #{::File.read('NAME').strip} and #{destroyed} were sent a terminate signal, these may have been previously terminated"
+      puts "Ran a check for extra instances related to cookbook #{::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'NAME'))} and #{destroyed} were sent a terminate signal, these may have been previously terminated"
     end
   end
 end
