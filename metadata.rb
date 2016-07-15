@@ -4,7 +4,7 @@ maintainer_email 'LouTheBrew@gmail.com'
 license 'MIT'
 description 'Installs/Configures poise-ruby-init'
 long_description 'Installs/Configures poise-ruby-init'
-version '0.1.6'
+version ::File.read(::File.join(::File.dirname(::File.join(__FILE__)), 'VERSION'))
 
 depends 'poise'
-depends 'poise-ruby-build'
+depends 'eldus-ruby-build'
