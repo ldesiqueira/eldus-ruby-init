@@ -16,7 +16,7 @@ module InitService
     attribute :ruby_version, default: '2.1.2'
     attribute :mode, default: 0777
     attribute :template_stub, default: 'service.erb'
-    attribute :local_cookbook, default: 'poise-ruby-init'
+    attribute :local_cookbook, default: 'eldus-ruby-init'
     attribute :user, default: 'root'
     attribute :group, default: 'root'
     attribute :required_start, default: 'networking'
